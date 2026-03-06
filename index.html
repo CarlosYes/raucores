@@ -44,9 +44,10 @@
             margin-top: 39px;
         }
 
+        /* BARRA DE CORES: Descida de mais 1px (de -36px para -35px) */
         .theme-nav {
             position: absolute;
-            top: -36px; 
+            top: -35px; 
             left: 0;
             width: 100%;
             display: flex;
@@ -67,7 +68,7 @@
             flex-shrink: 0;
         }
 
-        /* QUADRO AJUSTADO: Totalizando 4px direita e 5px para cima */
+        /* QUADRO: Mantido com 4px direita e 5px para cima */
         .xat-area-frame {
             width: 728px;
             height: 486px;
@@ -204,7 +205,7 @@
             border.style.boxShadow = `0 0 70px ${borderColor}, inset 0 0 35px ${borderColor}`;
             bg.style.background = `linear-gradient(to bottom, ${topColor} 0%, ${bottomColor} 100%)`;
         }
-        document.oncontextmenu = function(){ alert("©arlos Copyright - Requinte Máximo"); return false; };
+        document.oncontextmenu = function(){ alert("©arlos Copyright"); return false; };
     </script>
 </body>
 </html>
