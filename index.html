@@ -13,10 +13,10 @@
             overflow: hidden;
             display: flex;
             justify-content: center;
-            /* Alinhamento ao topo com margem de segurança para a barra do xat */
             align-items: flex-start; 
-            padding-top: 60px; /* ESPAÇO SEGURO: Empurra as bolas para baixo da barra do xat */
+            padding-top: 60px; 
             background: #000 url('https://img.freepik.com/fotos-premium/fundo-de-rosas-pretas-estilo-gotico-luxuoso_863013-43305.jpg') center/cover no-repeat;
+            font-family: sans-serif;
         }
 
         .bg-overlay {
@@ -25,12 +25,12 @@
             background: linear-gradient(to bottom, rgba(0, 255, 0, 0.4) 0%, rgba(255, 255, 0, 0.4) 100%);
             z-index: 1;
             pointer-events: none;
+            transition: 1s;
         }
 
-        /* ESCALA INTELIGENTE: Mantém o teu design 1:1 no teu PC */
         .main-scaler {
             transform: scale(min(1, calc(100vw / 1580), calc(100vh / 950)));
-            transform-origin: top center; /* Escala a partir do topo para não perder as bolas */
+            transform-origin: top center;
             display: flex;
             justify-content: center;
             align-items: center;
@@ -41,13 +41,13 @@
             position: relative;
             width: 728px;
             height: 486px;
-            margin-top: 45px; /* Compensa a altura das bolas */
+            margin-top: 39px; /* Ajuste para as bolas não forçarem descida excessiva */
         }
 
-        /* AS BOLAS: Agora com Z-Index altíssimo e posição fixa relativa ao quadro */
+        /* AS BOLAS: Ajustadas 3px para baixo para encostar no quadro */
         .theme-nav {
             position: absolute;
-            top: -45px; /* Coladas exatamente no topo do quadro */
+            top: -39px; 
             left: 0;
             width: 100%;
             display: flex;
@@ -67,6 +67,19 @@
             transition: 0.3s;
         }
 
+        /* PLAYER DE VOLUME (Discreto no canto das bolas) */
+        .volume-ctrl {
+            position: absolute;
+            right: -50px;
+            top: 0;
+            display: flex;
+            align-items: center;
+            background: rgba(0,0,0,0.6);
+            padding: 5px;
+            border-radius: 20px;
+            border: 1px solid #fff;
+        }
+
         .xat-area-frame {
             width: 728px;
             height: 486px;
@@ -77,7 +90,6 @@
             z-index: 50;
         }
 
-        /* BONECOS E TEXTOS LATERAIS */
         .dj-wrap {
             position: absolute;
             top: 50px;
@@ -107,7 +119,7 @@
             z-index: 30;
             text-transform: uppercase;
             font-weight: 900;
-            font-family: 'Segoe UI', Arial, sans-serif;
+            letter-spacing: -2px;
         }
 
         .left-dj .v-label { transform: rotate(-90deg); left: -85px; }
@@ -139,25 +151,29 @@
 
     <div class="bg-overlay" id="overlay"></div>
 
+    <audio id="radioPlayer" autoplay loop>
+        <source src="URL_DA_TUA_RADIO" type="audio/mpeg">
+    </audio>
+
     <div class="main-scaler">
         <div class="stage-area">
             
             <div class="theme-nav">
-                <span style="--c1:#00ff00; --c2:#004400;" onclick="applyLuxury('#00ff00','rgba(0,255,0,0.5)','rgba(0,50,0,0.7)')"></span> 
-                <span style="--c1:#0000ff; --c2:#000033;" onclick="applyLuxury('#0000ff','rgba(0,0,255,0.5)','rgba(0,0,50,0.7)')"></span> 
-                <span style="--c1:#ff0000; --c2:#440000;" onclick="applyLuxury('#ff0000','rgba(255,0,0,0.5)','rgba(50,0,0,0.7)')"></span> 
-                <span style="--c1:#00ffff; --c2:#004444;" onclick="applyLuxury('#00ffff','rgba(0,255,255,0.5)','rgba(0,50,50,0.7)')"></span> 
-                <span style="--c1:#ff00ff; --c2:#440044;" onclick="applyLuxury('#ff00ff','rgba(255,0,255,0.5)','rgba(50,0,50,0.7)')"></span> 
-                <span style="--c1:#ffff00; --c2:#444400;" onclick="applyLuxury('#ffff00','rgba(255,255,0,0.5)','rgba(50,50,0,0.7)')"></span>
-                <span style="--c1:#ffffff; --c2:#333333;" onclick="applyLuxury('#ffffff','rgba(255,255,255,0.4)','rgba(50,50,50,0.4)')"></span>
-                <span style="--c1:#ff8800; --c2:#442200;" onclick="applyLuxury('#ff8800','rgba(255,136,0,0.5)','rgba(100,50,0,0.7)')"></span>
-                <span style="--c1:#8800ff; --c2:#220044;" onclick="applyLuxury('#8800ff','rgba(136,0,255,0.5)','rgba(50,0,100,0.7)')"></span>
-                <span style="--c1:#00ff88; --c2:#004422;" onclick="applyLuxury('#00ff88','rgba(0,255,136,0.5)','rgba(0,100,50,0.7)')"></span>
-                <span style="--c1:#4b0082; --c2:#1a0033;" onclick="applyLuxury('#4b0082','rgba(75,0,130,0.5)','rgba(0,0,0,0.8)')"></span>
-                <span style="--c1:#adff2f; --c2:#223300;" onclick="applyLuxury('#adff2f','rgba(173,255,47,0.5)','rgba(50,70,0,0.7)')"></span>
-                <span style="--c1:#ffa07a; --c2:#441111;" onclick="applyLuxury('#ffa07a','rgba(255,160,122,0.5)','rgba(80,30,30,0.7)')"></span>
-                <span style="--c1:#7fffd4; --c2:#003322;" onclick="applyLuxury('#7fffd4','rgba(127,255,212,0.5)','rgba(30,80,60,0.7)')"></span>
-                <span style="--c1:#ffd700; --c2:#332200;" onclick="applyLuxury('#ffd700','rgba(255,215,0,0.5)','rgba(0,0,0,0.8)')"></span>
+                <span style="--c1:#00ff00; --c2:#004400;" onclick="applyTheme('#00ff00','rgba(0,255,0,0.5)','rgba(0,50,0,0.7)')"></span> 
+                <span style="--c1:#0000ff; --c2:#000033;" onclick="applyTheme('#0000ff','rgba(0,0,255,0.5)','rgba(0,0,50,0.7)')"></span> 
+                <span style="--c1:#ff0000; --c2:#440000;" onclick="applyTheme('#ff0000','rgba(255,0,0,0.5)','rgba(50,0,0,0.7)')"></span> 
+                <span style="--c1:#00ffff; --c2:#004444;" onclick="applyTheme('#00ffff','rgba(0,255,255,0.5)','rgba(0,50,50,0.7)')"></span> 
+                <span style="--c1:#ff00ff; --c2:#440044;" onclick="applyTheme('#ff00ff','rgba(255,0,255,0.5)','rgba(50,0,50,0.7)')"></span> 
+                <span style="--c1:#ffff00; --c2:#444400;" onclick="applyTheme('#ffff00','rgba(255,255,0,0.5)','rgba(50,50,0,0.7)')"></span>
+                <span style="--c1:#ffffff; --c2:#333333;" onclick="applyTheme('#ffffff','rgba(255,255,255,0.4)','rgba(50,50,50,0.4)')"></span>
+                <span style="--c1:#ff8800; --c2:#442200;" onclick="applyTheme('#ff8800','rgba(255,136,0,0.5)','rgba(100,50,0,0.7)')"></span>
+                <span style="--c1:#8800ff; --c2:#220044;" onclick="applyTheme('#8800ff','rgba(136,0,255,0.5)','rgba(50,0,100,0.7)')"></span>
+                <span style="--c1:#00ff88; --c2:#004422;" onclick="applyTheme('#00ff88','rgba(0,255,136,0.5)','rgba(0,100,50,0.7)')"></span>
+                <span style="--c1:#4b0082; --c2:#1a0033;" onclick="applyTheme('#4b0082','rgba(75,0,130,0.5)','rgba(0,0,0,0.8)')"></span>
+                <span style="--c1:#adff2f; --c2:#223300;" onclick="applyTheme('#adff2f','rgba(173,255,47,0.5)','rgba(50,70,0,0.7)')"></span>
+                <span style="--c1:#ffa07a; --c2:#441111;" onclick="applyTheme('#ffa07a','rgba(255,160,122,0.5)','rgba(80,30,30,0.7)')"></span>
+                <span style="--c1:#7fffd4; --c2:#003322;" onclick="applyTheme('#7fffd4','rgba(127,255,212,0.5)','rgba(30,80,60,0.7)')"></span>
+                <span style="--c1:#ffd700; --c2:#332200;" onclick="applyTheme('#ffd700','rgba(255,215,0,0.5)','rgba(0,0,0,0.8)')"></span>
             </div>
 
             <div class="dj-wrap left-dj">
@@ -177,13 +193,33 @@
     </div>
 
     <script>
-        function applyLuxury(borderColor, topColor, bottomColor) {
+        const audio = document.getElementById('radioPlayer');
+
+        // MEMÓRIA DE VOLUME: Recupera o que foi guardado
+        window.onload = () => {
+            const savedVolume = localStorage.getItem('radioVolume');
+            if (savedVolume !== null) {
+                audio.volume = savedVolume;
+            }
+        };
+
+        function applyTheme(borderColor, topColor, bottomColor) {
             const border = document.getElementById('luxury-border');
             const bg = document.getElementById('overlay');
             border.style.borderColor = borderColor;
             border.style.boxShadow = `0 0 70px ${borderColor}, inset 0 0 35px ${borderColor}`;
             bg.style.background = `linear-gradient(to bottom, ${topColor} 0%, ${bottomColor} 100%)`;
+            
+            // Ativa o som ao interagir
+            audio.play().catch(() => {}); 
         }
+
+        // Função para guardar o volume se tu mexeres nele futuramente
+        function setVolume(val) {
+            audio.volume = val;
+            localStorage.setItem('radioVolume', val);
+        }
+
         document.oncontextmenu = function(){ alert("©arlos Copyright"); return false; };
         document.onselectstart = function(){ return false; };
     </script>
