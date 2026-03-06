@@ -44,10 +44,9 @@
             margin-top: 39px;
         }
 
-        /* BARRA DE CORES: Estrutura original preservada */
         .theme-nav {
             position: absolute;
-            top: -39px; 
+            top: -36px; 
             left: 0;
             width: 100%;
             display: flex;
@@ -68,7 +67,7 @@
             flex-shrink: 0;
         }
 
-        /* QUADRO: Ajuste milimétrico (3px cima, 2px direita) com requinte */
+        /* QUADRO AJUSTADO: Totalizando 4px direita e 5px para cima */
         .xat-area-frame {
             width: 728px;
             height: 486px;
@@ -79,7 +78,7 @@
             z-index: 50;
             box-shadow: 0 0 40px rgba(255,255,255,0.1);
             overflow: hidden;
-            transform: translate(2px, -3px);
+            transform: translate(4px, -5px);
         }
 
         .xat-area-frame::after {
@@ -96,7 +95,6 @@
             100% { transform: translateX(100%) rotate(45deg); }
         }
 
-        /* BONECA DJs: 10px abaixo da posição inicial original */
         .dj-wrap {
             position: absolute;
             top: 60px; 
@@ -114,11 +112,9 @@
         .dj-wrap img { 
             width: 280px; 
             filter: drop-shadow(0 10px 20px rgba(0,0,0,0.8));
-            /* AQUI: Revertido para a animação ORIGINAL exata (floatAnim) */
             animation: floatAnim 4s ease-in-out infinite;
         }
 
-        /* Animação ORIGINAL preservada */
         @keyframes floatAnim { 
             0%, 100% { transform: translateY(0); } 
             50% { transform: translateY(-10px); } 
