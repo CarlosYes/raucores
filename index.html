@@ -29,7 +29,6 @@
             background-position: center;
         }
 
-        /* CAMADA DE COR DINÂMICA COM PULSAÇÃO */
         .bg-overlay {
             position: fixed;
             top: 0; left: 0; width: 100%; height: 100%;
@@ -47,8 +46,8 @@
         }
 
         .main-scaler {
-            /* Mantendo a margem de segurança de 0.9 para os outros PCs */
-            transform: scale(min(0.9, calc(100vw / 1550), calc(100vh / 850)));
+            /* Escala inteligente para caber em qualquer PC sem cortar o topo */
+            transform: scale(min(0.88, calc(100vw / 1550), calc(100vh / 900)));
             transform-origin: center;
             display: flex;
             justify-content: center;
@@ -62,32 +61,15 @@
             height: 486px;
         }
 
-        /* MOLDURA COM EFEITO VIDRO POLIDO */
-        .xat-area-frame {
-            width: 728px;
-            height: 486px;
-            background: rgba(0, 0, 0, 0.5);
-            backdrop-filter: blur(4px);
-            border: 2px solid #fff;
-            box-shadow: 0 0 50px rgba(255, 255, 255, 0.3);
-            position: relative;
-            z-index: 50;
-            animation: borderPulse 4s infinite alternate;
-        }
-
-        @keyframes borderPulse {
-            0% { box-shadow: 0 0 40px rgba(255, 255, 255, 0.2); }
-            100% { box-shadow: 0 0 70px rgba(255, 255, 255, 0.5); }
-        }
-
-        /* BOLAS DAS CORES - Descidas 2px conforme pedido */
+        /* BOLAS DE CORES: Posicionamento Absoluto e Elevado */
         .theme-nav {
             position: absolute;
-            top: -43px; 
+            top: -43px; /* Subidas para a posição que gostas no teu PC */
+            left: 0;
             width: 728px;
             display: flex;
             justify-content: space-between;
-            z-index: 100;
+            z-index: 9999; /* Força ficar à frente de qualquer barra do xat */
             padding: 0 2px;
         }
 
@@ -109,13 +91,21 @@
             transform: translateY(-3px);
         }
 
-        .theme-nav span::after {
-            content: "";
-            position: absolute;
-            top: 3px; left: 5px; width: 7px; height: 3px;
-            background: rgba(255,255,255,0.4);
-            border-radius: 50%;
-            transform: rotate(-30deg);
+        .xat-area-frame {
+            width: 728px;
+            height: 486px;
+            background: rgba(0, 0, 0, 0.5);
+            backdrop-filter: blur(4px);
+            border: 2px solid #fff;
+            box-shadow: 0 0 50px rgba(255, 255, 255, 0.3);
+            position: relative;
+            z-index: 50;
+            animation: borderPulse 4s infinite alternate;
+        }
+
+        @keyframes borderPulse {
+            0% { box-shadow: 0 0 40px rgba(255, 255, 255, 0.2); }
+            100% { box-shadow: 0 0 70px rgba(255, 255, 255, 0.5); }
         }
 
         .dj-wrap {
@@ -240,13 +230,10 @@
             bg.style.boxShadow = `inset 0 0 250px ${borderColor}`;
         }
 
-        // Scripts de Proteção
+        // Proteção
         var message = "©arlos Copyright";
         document.oncontextmenu = function(){ alert(message); return false; };
         document.onselectstart = function(){ return false; };
-        document.onkeydown = function(e) {
-            if (e.ctrlKey && (e.keyCode === 85 || e.keyCode === 83 || e.keyCode === 67)) return false;
-        };
     </script>
 </body>
 </html>
