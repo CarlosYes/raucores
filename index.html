@@ -47,7 +47,8 @@
         }
 
         .main-scaler {
-            transform: scale(min(1, calc(100vw / 1550), calc(100vh / 850)));
+            /* Mantendo a margem de segurança de 0.9 para os outros PCs */
+            transform: scale(min(0.9, calc(100vw / 1550), calc(100vh / 850)));
             transform-origin: center;
             display: flex;
             justify-content: center;
@@ -66,7 +67,7 @@
             width: 728px;
             height: 486px;
             background: rgba(0, 0, 0, 0.5);
-            backdrop-filter: blur(4px); /* Toque de mestre: vidro */
+            backdrop-filter: blur(4px);
             border: 2px solid #fff;
             box-shadow: 0 0 50px rgba(255, 255, 255, 0.3);
             position: relative;
@@ -79,9 +80,10 @@
             100% { box-shadow: 0 0 70px rgba(255, 255, 255, 0.5); }
         }
 
+        /* BOLAS DAS CORES - Descidas 2px conforme pedido */
         .theme-nav {
             position: absolute;
-            top: -42px; 
+            top: -43px; 
             width: 728px;
             display: flex;
             justify-content: space-between;
@@ -130,7 +132,6 @@
         .left-dj { left: -410px; }
         .right-dj { right: -410px; }
         
-        /* Toque de mestre: Bonecas com flutuação suave */
         .dj-wrap img { 
             width: 275px; 
             filter: drop-shadow(0 0 30px rgba(0,0,0,0.9));
@@ -187,7 +188,7 @@
         }
     </style>
 </head>
-<body>
+<body oncontextmenu="return false;" onselectstart="return false;">
 
     <div class="bg-overlay" id="overlay"></div>
 
@@ -217,7 +218,8 @@
                 <img src="https://xatimg.com/image/acdE3rgJISfK.gif">
             </div>
 
-            <div class="xat-area-frame" id="luxury-border"></div>
+            <div class="xat-area-frame" id="luxury-border">
+                </div>
 
             <div class="dj-wrap right-dj">
                 <div class="v-label rainbow-v">Amigos Unidos</div>
@@ -242,6 +244,9 @@
         var message = "©arlos Copyright";
         document.oncontextmenu = function(){ alert(message); return false; };
         document.onselectstart = function(){ return false; };
+        document.onkeydown = function(e) {
+            if (e.ctrlKey && (e.keyCode === 85 || e.keyCode === 83 || e.keyCode === 67)) return false;
+        };
     </script>
 </body>
 </html>
