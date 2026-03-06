@@ -2,31 +2,20 @@
 <html lang="pt-PT">
 <head>
     <title>Radio Amigos Unidos</title>
-    <meta name="description" content="RAU" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
-    <meta http-equiv="X-UA-Compatible" content="IE=Edge"/>
-    <meta property="og:title" content="RAU Player" />
-    <meta property="og:description" content="RAU" />
-    <link rel="icon" type="image/png" href="https://i.imgur.com/nNh98kV.png" sizes="48x48" />
-    <link rel="icon" type="image/png" href="https://i.imgur.com/nNh98kV.png" sizes="96x96" />
-    <link rel="icon" type="image/png" href="https://i.imgur.com/nNh98kV.png" sizes="144x144" />
-    <link rel="icon" type="image/png" href="https://i.imgur.com/nNh98kV.png" sizes="192x192" />
-    <link rel="apple-touch-icon" href="https://i.imgur.com/nNh98kV.png" sizes="180x180"/>
+    <meta charset="utf-8"/>
     <style type="text/css">
+        /* Reset total para evitar margens fantasmas */
         * { margin: 0; padding: 0; box-sizing: border-box; }
 
         body {
             height: 100vh;
             width: 100vw;
-            overflow: hidden; /* Impede barras de rolagem em qualquer ecrã */
+            overflow: hidden;
             display: flex;
             justify-content: center;
             align-items: center;
-            background-color: #000;
-            background-image: url('https://img.freepik.com/fotos-premium/fundo-de-rosas-pretas-estilo-gotico-luxuoso_863013-43305.jpg');
-            background-size: cover;
-            background-position: center;
+            background: #000 url('https://img.freepik.com/fotos-premium/fundo-de-rosas-pretas-estilo-gotico-luxuoso_863013-43305.jpg') center/cover no-repeat;
         }
 
         .bg-overlay {
@@ -34,26 +23,23 @@
             top: 0; left: 0; width: 100%; height: 100%;
             background: linear-gradient(to bottom, rgba(0, 255, 0, 0.4) 0%, rgba(255, 255, 0, 0.4) 100%);
             z-index: 1;
-            transition: all 1s ease-in-out;
             pointer-events: none;
             box-shadow: inset 0 0 150px rgba(0,0,0,0.9);
-            animation: lightPulse 6s infinite alternate;
         }
 
-        @keyframes lightPulse { from { opacity: 0.7; } to { opacity: 1; } }
-
-        /* O CORAÇÃO DA ADAPTABILIDADE:
-           Ele calcula o tamanho total (quadro + bonecos lateralmente) 
-           e garante que caiba sempre na largura (1550px) e altura (850px) */
-        .main-scaler {
-            transform: scale(min(1, calc(100vw / 1600), calc(100vh / 900)));
-            transform-origin: center;
+        /* ESTA É A MÁGICA: A CAIXA MESTRA */
+        .master-container {
+            position: relative;
+            /* Largura total que o teu design precisa (Quadro + Bonecos) */
+            width: 1550px; 
+            height: 850px;
             display: flex;
             justify-content: center;
             align-items: center;
             z-index: 10;
-            width: 1550px; /* Define a área segura para os bonecos */
-            height: 850px;
+            /* Garante que se o ecrã for pequeno, ele escala TUDO proporcionalmente */
+            transform: scale(min(1, calc(100vw / 1550), calc(100vh / 850)));
+            transform-origin: center;
         }
 
         .stage-area {
@@ -62,10 +48,12 @@
             height: 486px;
         }
 
+        /* BOLAS: Fixas ao topo do quadro com Z-Index máximo */
         .theme-nav {
             position: absolute;
             top: -42px; 
-            width: 728px;
+            left: 0;
+            width: 100%;
             display: flex;
             justify-content: space-between;
             z-index: 9999;
@@ -79,11 +67,9 @@
             cursor: pointer;
             background: radial-gradient(circle at 35% 35%, #fff 0%, var(--c1) 40%, var(--c2) 100%);
             border: 1px solid rgba(255,255,255,0.4);
-            box-shadow: 0 4px 10px rgba(0,0,0,0.8), inset -2px -2px 4px rgba(0,0,0,0.4);
-            transition: 0.3s ease;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.8);
+            transition: 0.3s;
         }
-
-        .theme-nav span:hover { filter: brightness(1.3); transform: translateY(-3px); }
 
         .xat-area-frame {
             width: 728px;
@@ -93,19 +79,14 @@
             border: 2px solid #fff;
             position: relative;
             z-index: 50;
-            animation: borderPulse 4s infinite alternate;
         }
 
-        @keyframes borderPulse {
-            0% { box-shadow: 0 0 40px rgba(255, 255, 255, 0.2); }
-            100% { box-shadow: 0 0 70px rgba(255, 255, 255, 0.5); }
-        }
-
+        /* BONECOS: Posicionados em relação ao QUADRO, não ao ecrã */
         .dj-wrap {
             position: absolute;
             top: 60px;
-            height: 486px;
             width: 450px;
+            height: 486px;
             display: flex;
             align-items: center;
             justify-content: center;
@@ -131,12 +112,12 @@
             text-transform: uppercase;
             font-weight: 900;
             font-family: 'Segoe UI', Arial, sans-serif;
-            letter-spacing: -2px;
         }
 
         .left-dj .v-label { transform: rotate(-90deg); left: -85px; }
         .right-dj .v-label { transform: rotate(90deg); right: -165px; }
 
+        /* TEXTOS ARCO-ÍRIS */
         .rainbow-v {
             background: linear-gradient(to bottom, #FF0000, #FF00FF, #0000FF, #00FFFF, #00FF00, #FFFF00, #FF0000);
             background-size: auto 200%;
@@ -172,7 +153,7 @@
 
     <div class="bg-overlay" id="overlay"></div>
 
-    <div class="main-scaler">
+    <div class="master-container">
         <div class="stage-area">
             
             <div class="theme-nav">
@@ -217,7 +198,6 @@
             border.style.borderColor = borderColor;
             border.style.boxShadow = `0 0 70px ${borderColor}, inset 0 0 35px ${borderColor}`;
             bg.style.background = `linear-gradient(to bottom, ${topColor} 0%, ${bottomColor} 100%)`;
-            bg.style.boxShadow = `inset 0 0 250px ${borderColor}`;
         }
         document.oncontextmenu = function(){ alert("©arlos Copyright"); return false; };
         document.onselectstart = function(){ return false; };
