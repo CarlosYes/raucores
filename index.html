@@ -5,7 +5,6 @@
     <meta charset="utf-8"/>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <style type="text/css">
-        /* Reset para evitar interferências do xat */
         * { margin: 0; padding: 0; box-sizing: border-box; }
 
         body {
@@ -29,7 +28,6 @@
             transition: 1.5s ease-in-out;
         }
 
-        /* ESTE É O SEGREDO: Mantém a precisão milimétrica em qualquer ecrã */
         .main-scaler {
             transform: scale(min(1, calc(100vw / 1580), calc(100vh / 950)));
             transform-origin: top center;
@@ -37,7 +35,7 @@
             justify-content: center;
             align-items: center;
             z-index: 10;
-            width: 1580px; /* Largura virtual para manter as distâncias fixas */
+            width: 1580px; 
         }
 
         .stage-area {
@@ -109,8 +107,10 @@
             padding-top: 110px; 
         }
 
-        .left-dj { left: -380px; }
-        .right-dj { right: -380px; }
+        /* DJ Esquerda a -370px */
+        .left-dj { left: -370px; }
+        /* DJ Direita movido 10px para a esquerda (de -380 para -370) */
+        .right-dj { right: -370px; }
         
         .dj-wrap img { 
             width: 350px; 
@@ -140,8 +140,9 @@
             margin-top: -110px; 
         }
 
-        .left-dj .v-label { transform: rotate(-90deg); left: -125px; }
-        .right-dj .v-label { transform: rotate(90deg); right: -215px; }
+        .left-dj .v-label { transform: rotate(-90deg); left: -115px; }
+        /* Texto da direita acompanhou o movimento do DJ */
+        .right-dj .v-label { transform: rotate(90deg); right: -205px; }
 
         .rainbow {
             background: linear-gradient(to right, #FF0000, #FF00FF, #0000FF, #00FFFF, #00FF00, #FFFF00, #FF0000);
