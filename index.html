@@ -5,6 +5,7 @@
     <meta charset="utf-8"/>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <style type="text/css">
+        /* Reset para evitar interferências do xat */
         * { margin: 0; padding: 0; box-sizing: border-box; }
 
         body {
@@ -28,6 +29,7 @@
             transition: 1.5s ease-in-out;
         }
 
+        /* ESTE É O SEGREDO: Mantém a precisão milimétrica em qualquer ecrã */
         .main-scaler {
             transform: scale(min(1, calc(100vw / 1580), calc(100vh / 950)));
             transform-origin: top center;
@@ -35,6 +37,7 @@
             justify-content: center;
             align-items: center;
             z-index: 10;
+            width: 1580px; /* Largura virtual para manter as distâncias fixas */
         }
 
         .stage-area {
@@ -44,7 +47,6 @@
             margin-top: 39px;
         }
 
-        /* BARRA DE CORES: Descida de mais 1px (de -36px para -35px) */
         .theme-nav {
             position: absolute;
             top: -35px; 
@@ -68,7 +70,6 @@
             flex-shrink: 0;
         }
 
-        /* QUADRO: Mantido com 4px direita e 5px para cima */
         .xat-area-frame {
             width: 728px;
             height: 486px;
@@ -98,27 +99,34 @@
 
         .dj-wrap {
             position: absolute;
-            top: 60px; 
-            width: 450px;
+            top: 25px; 
+            width: 400px;
             height: 486px;
             display: flex;
             align-items: center;
             justify-content: center;
             z-index: 20;
+            padding-top: 110px; 
         }
 
-        .left-dj { left: -420px; }
-        .right-dj { right: -420px; }
+        .left-dj { left: -380px; }
+        .right-dj { right: -380px; }
         
         .dj-wrap img { 
-            width: 280px; 
+            width: 350px; 
             filter: drop-shadow(0 10px 20px rgba(0,0,0,0.8));
+            transform: scaleY(1.15); 
             animation: floatAnim 4s ease-in-out infinite;
         }
 
+        .left-dj img {
+            width: 380px; 
+            margin-left: -20px;
+        }
+
         @keyframes floatAnim { 
-            0%, 100% { transform: translateY(0); } 
-            50% { transform: translateY(-10px); } 
+            0%, 100% { transform: scaleY(1.15) translateY(0); } 
+            50% { transform: scaleY(1.15) translateY(-10px); } 
         }
 
         .v-label {
@@ -129,10 +137,11 @@
             text-transform: uppercase;
             font-weight: 900;
             letter-spacing: -2px;
+            margin-top: -110px; 
         }
 
-        .left-dj .v-label { transform: rotate(-90deg); left: -85px; }
-        .right-dj .v-label { transform: rotate(90deg); right: -165px; }
+        .left-dj .v-label { transform: rotate(-90deg); left: -125px; }
+        .right-dj .v-label { transform: rotate(90deg); right: -215px; }
 
         .rainbow {
             background: linear-gradient(to right, #FF0000, #FF00FF, #0000FF, #00FFFF, #00FF00, #FFFF00, #FF0000);
@@ -183,14 +192,14 @@
 
             <div class="dj-wrap left-dj">
                 <div class="v-label rainbow">Rádio Dos</div>
-                <img src="https://xatimg.com/image/acdE3rgJISfK.gif" alt="DJ 1">
+                <img src="https://i.imgur.com/ElDKf77.png" alt="DJ 1">
             </div>
 
             <div class="xat-area-frame" id="luxury-border"></div>
 
             <div class="dj-wrap right-dj">
                 <div class="v-label rainbow">Amigos Unidos</div>
-                <img src="https://xatimg.com/image/uC0o5wdU6vzD.gif" alt="DJ 2">
+                <img src="https://i.imgur.com/eiDVyon.png" alt="DJ 2">
             </div>
 
             <div class="footer-text rainbow">Amigos De Verdade É Aqui...</div>
